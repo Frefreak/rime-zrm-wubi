@@ -41,6 +41,9 @@ with open('data/zrm2000.dict.yaml') as f:
             except KeyError:
                 print(f'skipping {chars}')
                 continue
+            new_code = code[:chars_len * 2] + wubi_code
+            lines.append(f'{chars}\t{new_code[:4]}')
+            handled.add(chars)
         elif chars_len * 2 >= len(code):
             lines.append(line)
             continue
@@ -50,10 +53,9 @@ with open('data/zrm2000.dict.yaml') as f:
             except KeyError:
                 print(f'skipping {chars}')
                 continue
-
-        new_code = code[:chars_len * 2] + wubi_code
-        lines.append(f'{chars}\t{new_code}')
-        handled.add(chars)
+            new_code = code[:chars_len * 2] + wubi_code
+            lines.append(f'{chars}\t{new_code}')
+            handled.add(chars)
 
 with open('zrm_wubi.dict.yaml', 'w') as f:
     f.write('\n'.join(lines))
