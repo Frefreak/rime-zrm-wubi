@@ -32,26 +32,28 @@ with open('data/zrm2000.dict.yaml') as f:
         chars, code = line.split('\t')
         chars_len = len(chars)
 
+        if chars_len * 2 > len(code):
+            lines.append(line)
+            continue
+
         if chars in handled:
             continue
 
-        if chars_len == 1:
+        if chars_len == 1 and len(code) == 2:
             try:
                 wubi_code = wubi_dict[chars]
             except KeyError:
-                print(f'skipping {chars}')
+                # print(f'skipping {chars}')
                 continue
-            new_code = code[:chars_len * 2] + wubi_code
+            new_code = code[:2] + wubi_code
+            lines.append(f'{chars}\t{code}')
             lines.append(f'{chars}\t{new_code[:4]}')
             handled.add(chars)
-        elif chars_len * 2 >= len(code):
-            lines.append(line)
-            continue
         else:
             try:
                 wubi_code = ''.join([wubi_dict[c][0] for c in chars])
             except KeyError:
-                print(f'skipping {chars}')
+                # print(f'skipping {chars}')
                 continue
             new_code = code[:chars_len * 2] + wubi_code
             lines.append(f'{chars}\t{new_code}')

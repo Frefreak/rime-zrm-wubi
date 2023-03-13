@@ -20,6 +20,11 @@ switches:
     states: [ 中文, 西文 ]
   - name: full_shape
     states: [ 半角, 全角 ]
+  - name: simplification
+    reset: 1
+    states: [ 漢字, 汉字 ]
+  - name: ascii_punct
+    states: [ 。，, ．， ]
 
 engine:
   processors:
@@ -42,6 +47,9 @@ engine:
     - punct_translator
     - table_translator
     - reverse_lookup_translator
+  filters:
+    - simplifier
+    - uniquifier
 
 speller:
   alphabet: ',.abcdefghijklmnopqrstuvwxyz'
