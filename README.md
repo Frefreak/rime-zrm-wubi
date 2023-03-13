@@ -10,6 +10,7 @@ wubi86用于反查，zrm_wubi用于定义自然码+五笔辅助码
 - gen_dict.py: 生成`zrm_wubi.dict.yaml`的脚本
 - data/wubi86.dict.yaml: rime-wubi包自带的五笔dict文件，用来简单的获取单字五笔的编码
 - data/zrm2000.dict.yaml: `https://raw.githubusercontent.com/mutoe/rime`偷来的，修改对应的码表
+- 带simplified的两个文件：另一种规则生成的脚本和dict文件，`zrm_wubi.dict.yaml.simplified`替换`zrm_wubi.dict.yaml`使用
 
 生成规则：获取五笔单字的编码，然后处理zrm2000表。每一行如果编码小于等于汉字数*2，则不做修改。
 否则把多余的部分移除后添加五笔辅助码(每个字取五笔编码首字母)。这种情况每个词只会处理一次。
